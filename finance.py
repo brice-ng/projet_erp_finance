@@ -53,19 +53,24 @@ def sousCompte(code,pourcentage,montant,parent):
 
 def creerSousCompte(compte):
     code =int(input('entrer le code : '))
-    parent = int(input('entrer numero compte parent : '))
-    #print(type(code))
-    poucentage = int(input('entrer pourcentage : '))
+    if(not existCompte(compte,code)):
+        parent = int(input('entrer numero compte parent : '))
+        #print(type(code))
+        poucentage = int(input('entrer pourcentage : '))
 
-    if(parent == 0):
-        #print("entrer dans if")
-        mont = int (int(compte['montant'])*poucentage/100)
+        if(parent == 0):
+            #print("entrer dans if")
+            mont = int (int(compte['montant'])*poucentage/100)
+        else:
+            if():
+                sCompte = trouverCompte(compte,int(parent))
+                print(sCompte)
+                mont = int(sCompte['montant']) * poucentage / 100
+        compte['sousCompte'].append(sousCompte(code,poucentage,mont,parent))
     else:
-        if():
-            sCompte = trouverCompte(compte,int(parent))
-            print(sCompte)
-            mont = int(sCompte['montant']) * poucentage / 100
-    compte['sousCompte'].append(sousCompte(code,poucentage,mont,parent))
+        print("ce compte existe deja\n ")
+        print("Veuillez entrer un autre numero inexistant !!")
+
     return compte
 
 def trouverCompte(compte,code):
@@ -123,9 +128,13 @@ def debiter(compte,code,montant):
     if(code==0):
         print("impossible de debiter sur le compte principal")
     else:
-        compte['montant'] -= montant
-        soustraireCompteParent(compte,code,montant)
-
+        c =trouverCompte(compte, code)
+        if(c['montant']>montant):
+            compte['montant'] -= montant
+            soustraireCompteParent(compte,code,montant)
+        else:
+            print('solde insuffisant !!!!\n3'
+                  '')
 
 
 def repartirCompteParent(compte,code,montant):
