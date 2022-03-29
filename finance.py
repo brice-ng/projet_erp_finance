@@ -50,6 +50,7 @@ def sousCompte(code,pourcentage,montant,parent):
     return sousCompte;
 
 
+
 def creerSousCompte(compte):
     code =int(input('entrer le code : '))
     parent = int(input('entrer numero compte parent : '))
@@ -60,12 +61,12 @@ def creerSousCompte(compte):
         #print("entrer dans if")
         mont = int (int(compte['montant'])*poucentage/100)
     else:
-        sCompte = trouverCompte(compte,int(parent))
-        print(sCompte)
-        mont = int(sCompte['montant']) * poucentage / 100
+        if():
+            sCompte = trouverCompte(compte,int(parent))
+            print(sCompte)
+            mont = int(sCompte['montant']) * poucentage / 100
     compte['sousCompte'].append(sousCompte(code,poucentage,mont,parent))
     return compte
-
 
 def trouverCompte(compte,code):
     liste = compte['sousCompte']
@@ -81,15 +82,6 @@ def trouverCompte(compte,code):
     return None
 
 
-def existSousCompte(compte,code):
-    resp=False
-    liste = compte['sousCompte']
-
-    for i in liste:
-        if(i['compteParent'] == code):
-             return True
-    return resp
-
 def existCompte(compte,code):
     resp=False
     liste = compte['sousCompte']
@@ -97,16 +89,10 @@ def existCompte(compte,code):
     for i in liste:
         if(i['code'] == code):
              return True
+        if(code==0):
+            return True
     return resp
 
-def existCompteParent(compte,code):
-    resp=False
-    liste = compte['sousCompte']
-
-    for i in liste:
-        if(i['compteParent'] == code):
-             return True
-    return resp
 
 
 """
@@ -132,8 +118,8 @@ def crediter(compte,code,montant):
         compte['montant'] +=montant
         repartirCompteParent(compte,code,montant)
 
-def debiter(compte,code,montant):
 
+def debiter(compte,code,montant):
     if(code==0):
         print("impossible de debiter sur le compte principal")
     else:
