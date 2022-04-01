@@ -17,13 +17,23 @@ class Compte:
     def crediter(self,code,montant):
         if(self.code==code):
             for i in self.sousCompte:
-                m=i.pourcentage*montant
+                m=i.pourcentage*montant/100
                 i.montant += m
         else:
             for s in self.sousCompte:
                 if (s.code == code):
                     s.montant +=montant
             self.montant += montant
+
+    def debiterSousCompte(self,code,montant):
+
+        if (self.code == code):
+            print("débit impossible sur ce compte!")
+        else:
+            for s in self.sousCompte:
+                if (s.code == code):
+                    s.debiter(montant)
+            self.montant -= montant
 
     #def crediter(self,montant):
 
@@ -66,6 +76,8 @@ class SousCompte(Compte):
         return "code: {0}, montant: {1} ,solde: {2} ,restPercentage: {3}, codeParent: {4}, pourcentage: {5}".format(self.code,self.montant,self.solde,self.restPercentage,self.codeParent,self.pourcentage)
 
 
+     def debiter(self, montant):
+        self.montant -= montant
 
 
 if __name__ == '__main__':

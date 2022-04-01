@@ -1,4 +1,5 @@
 from finance.Compte import Compte
+from finance.Compte import SousCompte
 
 
 if __name__ == '__main__':
@@ -22,7 +23,9 @@ if __name__ == '__main__':
 
         if (execution == 1):
             #print(compte, "\n")
+            print("compte principal:")
             print(compte.__str__())
+            compte.listeSousCompte()
 
             execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
             print("\n")
@@ -39,7 +42,33 @@ if __name__ == '__main__':
                 execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
                 print("\n")
 
+            else:
+                if (execution == 3):
+                    print('')
+                    numero = int(input("Entrer le numero de compte : "))
+                    montant = int(input("Entrer le montant : "))
 
+                    compte.debiterSousCompte(numero,montant)
+                    #debiter sousCompte
+                    print(compte, "\n")
+                    execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
+                    print("\n")
+
+                elif(execution == 4):
+                    #creer sous compte
+                    codeParent = int(input("Entrer le code parent : "))
+                    numero = int(input("Entrer le numero de compte : "))
+                    pourcentage = int(input("Entrer le pourcentage : "))
+
+                    montant = compte.montant *pourcentage/100
+
+                    s = SousCompte(numero, montant, codeParent, pourcentage)
+                    compte.ajouterSousCompte(s)
+
+                    execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
+                    print("\n")
+
+    print("fin \n")
 
 
 
