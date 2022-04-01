@@ -5,6 +5,8 @@ def initCompte():
         "code":0,
         "sousCompte":[]
     }
+
+    """
     s1 = {
         "code": 1,
         "pourcentage": 50,
@@ -38,6 +40,8 @@ def initCompte():
         "montant": 250,
         "compteParent": 3
     })
+    
+    """
     return compte;
 
 def sousCompte(code,pourcentage,montant,parent):
@@ -87,6 +91,8 @@ def trouverCompte(compte,code):
     return None
 
 
+
+
 def existCompte(compte,code):
     resp=False
     liste = compte['sousCompte']
@@ -98,7 +104,15 @@ def existCompte(compte,code):
             return True
     return resp
 
-
+def lister(compte):
+    liste = compte['sousCompte']
+    print("compte principal : ",compte['montant'])
+    if(len(liste)>0):
+        print("Sous compte: \n")
+        for i in liste:
+            print(i)
+            print('\n')
+    print("terminer")
 
 """
 def ajouter(compte,code,montant):

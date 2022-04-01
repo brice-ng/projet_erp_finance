@@ -27,7 +27,7 @@ if __name__ == '__main__':
         print("1 : Lister tous les comptes \n")
         print("2 : Créditer compte \n")
         print("3 : Débiter Compte  \n")
-        # print("4 : Créer sous-compte \n")
+        print("4 : Créer sous-compte \n")
         # print("5 : Consulter compte \n")
         # print("6 : Consulter compte \n")
         # print("4 : Sortir \n")
@@ -35,7 +35,8 @@ if __name__ == '__main__':
         print("\n")
 
         if (execution == 1):
-            print(compte, "\n")
+            #print(compte, "\n")
+            lister(compte)
             execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
             print("\n")
         else:
@@ -50,7 +51,11 @@ if __name__ == '__main__':
                 print("\n")
             else:
                 if (execution == 3):
-                    debiter(compte, 5, 1500)
+                    print('')
+                    numero = int(input("Entrer le numero de compte : "))
+                    montant = int(input("Entrer le montant : "))
+
+                    debiter(compte, numero, montant)
                     print(compte, "\n")
                     execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
                     print("\n")
