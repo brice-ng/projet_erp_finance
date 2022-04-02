@@ -1,3 +1,5 @@
+import pickle
+import json
 from finance.Compte import Compte
 from finance.Compte import SousCompte
 
@@ -15,6 +17,8 @@ if __name__ == '__main__':
         print("2 : Créditer compte \n")
         print("3 : Débiter Compte  \n")
         print("4 : Créer sous-compte \n")
+        print("5 : Enregistrer dans un fichier \n")
+        print("6 : Lire dans un fichier \n")
         # print("5 : Consulter compte \n")
         # print("6 : Consulter compte \n")
         # print("4 : Sortir \n")
@@ -54,19 +58,38 @@ if __name__ == '__main__':
                     execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
                     print("\n")
 
-                elif(execution == 4):
-                    #creer sous compte
-                    codeParent = int(input("Entrer le code parent : "))
-                    numero = int(input("Entrer le numero de compte : "))
-                    pourcentage = int(input("Entrer le pourcentage : "))
+                else:
+                    if(execution == 4):
+                        #creer sous compte
+                        codeParent = int(input("Entrer le code parent : "))
+                        numero = int(input("Entrer le numero de compte : "))
+                        pourcentage = int(input("Entrer le pourcentage : "))
 
-                    montant = compte.montant *pourcentage/100
+                        montant = compte.montant *pourcentage/100
 
-                    s = SousCompte(numero, montant, codeParent, pourcentage)
-                    compte.ajouterSousCompte(s)
+                        s = SousCompte(numero, montant, codeParent, pourcentage)
+                        compte.ajouterSousCompte(s)
 
-                    execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
-                    print("\n")
+                        execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
+                        print("\n")
+                    else:
+                        if(execution == 5):
+                            # saves = compte.listeSousCompte()
+                            # fichier = open("savesAccount.txt", 'w')
+                            # pickle.dump(fichier,saves)
+                            # tf = open("sauvegardeCompte.txt", "w")
+                            # tf.write(compte.listeSousCompte())
+                            # tf.close()
+                            # s = SousCompte(numero, montant, codeParent, pourcentage)
+                            #lste = compte.listSous
+                            compte.save()
+                            execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
+                            print("\n")
+                        else:
+                            print(compte.lire())
+                            execution = int(input("Appuyez sur un chiffre pour afficher les listes : "))
+                            print("\n")
+
 
     print("fin \n")
 

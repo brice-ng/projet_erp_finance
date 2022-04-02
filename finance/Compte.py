@@ -1,6 +1,9 @@
 
 
 
+import pickle
+
+
 class Compte:
     def __init__(self,code,montant):
         self.code=code
@@ -47,12 +50,27 @@ class Compte:
         return -1
 
     def __str__(self):
-        return "code: {0}, montant: {1} ,solde: {2} ,restPercentage: {3}".format(self.code,self.montant,self.solde,self.restPercentage)
+        infoCompte = "code: {0}, montant: {1} ,solde: {2} ,restPercentage: {3}".format(self.code,self.montant,self.solde,self.restPercentage)
+        return infoCompte
 
     def listeSousCompte(self):
         print(f"Sous compte de {0} :",self.code)
         for s in self.sousCompte:
             print(s)
+
+
+    def listSous(self):
+        sous =[]
+        for s in self.sousCompte:
+            sous.append(s)
+        
+        return sous
+
+    def lire(f):
+            with open("sauvegardeCompte.txt", "rb") as fic:
+                dp = pickle.Unpickler(fic)
+                obj = dp.load()
+                return obj
 
 
     def listSousCompteByCode(self,code):
@@ -63,7 +81,18 @@ class Compte:
             if(s.code==code):
                 print(s)
 
+   
 
+
+    def save(self):
+        # print(self.sousCompte)
+        # self.enregistrer
+        enregistrer(self.sousCompte)
+
+def enregistrer(objet):
+    with open("sauvegardeCompte.txt", "ab") as f:
+        infoCompte = pickle.Pickler(f)
+        infoCompte.dump(objet)
 
 class SousCompte(Compte):
      def __init__(self,code,montant,codeParent,pourcentage):
@@ -77,7 +106,10 @@ class SousCompte(Compte):
 
 
      def debiter(self, montant):
-        self.montant -= montant
+        if(self.montant>=montant):
+            self.montant -= montant
+        else:
+            print("impossible solde insuffisant")
 
 
 if __name__ == '__main__':
